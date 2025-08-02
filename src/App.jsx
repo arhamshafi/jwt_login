@@ -1,8 +1,11 @@
 import React from 'react'
+import Sign_in from './components/Sign_in'
 
 function App() {
   return (
-    <div className='text-red-400'>app</div>
+    <div className='w-full h-max bg-white select-none'>
+      <Sign_in />
+    </div>
   )
 }
 
