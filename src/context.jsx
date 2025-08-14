@@ -12,9 +12,6 @@ function AppProvider({ children }) {
     let [crnt_user, set_crnt_user] = useState(null)
     console.log(crnt_user);
 
-
-
-
     let onhandle = (e) => {
         let { name, value } = e.target
         setLoginData({ ...loginData, [name]: value })
@@ -25,15 +22,17 @@ function AppProvider({ children }) {
         set_signup_data({ ...sign_up_data, [name]: value })
     }
 
-    let login = () => {
+    let login = async () => {
         if (!loginData.email || !loginData.password) {
             alert("Both fields required")
             return
         }
+        let res = await axios.get("http://localhost:5555/api/login_user", loginData)
+        console.log(res.data);
         console.log("login working");
-        setLoginData({ email: "", password: "" })
+        // setLoginData({ email: "", password: "" })
 
-        // navigate("/dash")
+
     }
 
     let Sign_up = async () => {
@@ -41,9 +40,10 @@ function AppProvider({ children }) {
             alert(" Both fields required ")
             return
         }
-
+        let res = await axios.post("http://localhost:5555/api/create_user", sign_up_data)
+        console.log(res.data);
         console.log(" sign_up working ");
-        set_signup_data({ name: "", number: "", email: "", password: "" })
+        // set_signup_data({ name: "", number: "", email: "", password: "" })
 
     }
 
