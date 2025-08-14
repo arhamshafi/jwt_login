@@ -3,11 +3,11 @@ import { FaPlus } from "react-icons/fa6";
 import { MdOutlineStars } from "react-icons/md";
 import { FaFacebook } from "react-icons/fa";
 import { App_context } from '../context';
+import { useNavigate } from 'react-router-dom';
 
 function Sign_in() {
-  let { loginData } = useContext(App_context)
-  console.log(loginData);
-  
+  let { loginData, onhandle, login } = useContext(App_context)
+  let navigate = useNavigate()
   return (
     <div className='w-full h-max py-15 bg-[#1a1a1a] flex justify-center items-center'>
       <div className='w-[85%] h-[max]  rounded-2xl bg-[#333333] py-.05 pb-10'>
@@ -16,7 +16,7 @@ function Sign_in() {
         <p className='text-white tracking-[1px] font-bold text-center mt-2 text-lg'>Recent Logins</p>
         <div className='w-full h-max py-1 flex justify-center items-center gap-5 mt-5 '>
           <div className='w-[100px] h-[100px] wx_sh bg-white rounded-xl flex justify-center items-center hover:scale-95 cursor-pointer transition-all duration-200 ease-in'> <MdOutlineStars className='text-yellow-500 text-7xl' /> </div>
-          <div className='w-[100px] h-[100px] ox_sh bg-[#CC5500] rounded-xl flex flex-col gap-3 items-center hover:scale-95 cursor-pointer transition-all duration-100 ease-in '>
+          <div className='w-[100px] h-[100px] ox_sh bg-[#CC5500] rounded-xl flex flex-col gap-3 items-center hover:scale-95 cursor-pointer transition-all duration-100 ease-in ' onClick={() => navigate("/sign_up")} >
             <div className='w-[35px] rounded-full h-[35px] bg-white/40 bx_sh flex  justify-center items-center mt-5'>
               <FaPlus className='text-white text-2xl' /> </div>
             <p className='text-white text-[12px] font-bold'>Add Account</p>
@@ -29,15 +29,15 @@ function Sign_in() {
         </div>
         <div className='w-[90%] h-max py-10 bg-black/80 mx-auto rounded-2xl mt-3'>
           <div className='w-full h-max flex justify-center items-center gap-10'>
-            <input type='email' placeholder='Enter Your Email' className='bg-white/40 outline-none px-5 border-3 border-transparent focus:border-orange-600 transition-all duration-150 ease-in text-white rounded-xl h-[50px] w-[450px]' />
-            <input type='password' placeholder='Enter Your Password' className='bg-white/40 outline-none px-5 border-3 border-transparent focus:border-orange-600 transition-all duration-150 ease-in text-white rounded-xl h-[50px] w-[450px]' />
+            <input type='email' placeholder='Enter Your Email' className='bg-white/40 outline-none px-5 border-3 border-transparent focus:border-orange-600 transition-all duration-150 ease-in text-white rounded-xl h-[50px] w-[450px]' onChange={onhandle} name="email" value={loginData.email} />
+            <input type='password' placeholder='Enter Your Password' className='bg-white/40 outline-none px-5 border-3 border-transparent focus:border-orange-600 transition-all duration-150 ease-in text-white rounded-xl h-[50px] w-[450px]' onChange={onhandle} name="password" value={loginData.password} />
           </div>
           <p className='text-white mt-4 text-sm w-max mx-auto hover:underline cursor-pointer'>Forgot Password</p>
-          <button className='w-[450px] h-[50px] rounded-2xl wx_sh bg-white mx-auto block mt-5 hover:scale-103 cursor-pointer transition-all duration-200 ease-in-out '>Login in</button>
-          <button className='w-[450px] h-[50px] ox_sh rounded-2xl bg-[#CC5500] mx-auto block text-white mt-5 hover:scale-103 cursor-pointer transition-all duration-200 ease-in-out'>Create New Account</button>
+          <button className='w-[450px] h-[50px] rounded-2xl wx_sh bg-white mx-auto block mt-5 hover:scale-103 cursor-pointer transition-all duration-200 ease-in-out ' onClick={login} >Login in</button>
+          <button className='w-[450px] h-[50px] ox_sh rounded-2xl bg-[#CC5500] mx-auto block text-white mt-5 hover:scale-103 cursor-pointer transition-all duration-200 ease-in-out' onClick={() => navigate("/sign_up")}>Create New Account</button>
           <div className='w-[90%] mx-auto mt-5 flex justify-center gap-10 items-center'>
             <div className='w-[35%] border border-white'></div>
-            <p className=' text-[#FFB347] to_sh text-md'>Or Continue With</p>
+            <p className=' text-[#FFB347] to_sh text-md'>Or Login With</p>
             <div className='w-[35%] border border-white'></div>
           </div>
           <div className='w-full mt-3 flex justify-center gap-5 items-center'>
